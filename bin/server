@@ -9,6 +9,7 @@ import Debug from 'debug';
 import CreateServer from '../server';
 
 const debug = Debug('localtunnel');
+const yn = require('yn');
 
 const argv = optimist
     .usage('Usage: $0 [--port num] [--address address] [--domain domain] [--max-sockets 10] [--client-min-port-range 3000 --client-max-port-range 3500]')
@@ -47,11 +48,11 @@ if (argv.help) {
 }
 
 const server = CreateServer({
-    max_tcp_sockets: argv['max-sockets'],
-    secure: argv.secure,
-    domain: argv.domain,
-    client_min_port_range: argv['client-min-port-range'],
-    client_max_port_range: argv['client-max-port-range']
+    max_tcp_sockets: process.env.MAX_SOCKETS || argv['max-sockets'],
+    secure: yn(process.env.SECURE) || argv.secure,
+    domain: process.env.DOMAIN || argv.domain,
+    client_min_port_range: process.env.CLIENT_MIN_PORT_RANGE || argv['client-min-port-range'],
+    client_max_port_range: process.env.CLIENT_MAX_PORT_RANGE || argv['client-max-port-range']
 });
 
 server.listen(argv.port, argv.address, () => {

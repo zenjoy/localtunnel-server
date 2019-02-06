@@ -27,6 +27,7 @@ export default function(opt) {
 
     const app = new Koa();
     const router = new Router();
+    const authentication_token = process.env.AUTH_TOKEN || opt.token
 
     app.use(async (ctx, next) => {
         try {
@@ -34,14 +35,13 @@ export default function(opt) {
         } catch (err) {
             ctx.status = err.status || 500;
             ctx.body = err.message;            
-            ctx.app.emit('error', err, ctx);
         }
     });
     
-    if (opt.token) {
+    if (authentication_token) {
         app.use((ctx, next) => {
             const token = ctx.request.query.token;
-            if (!token || opt.token !== token) {
+            if (!token || authentication_token !== token) {
                 const err = new Error(`Missing or unknown token.`);
                 err.status = 511;
                 err.code = 'TOKEN_ERROR';
