@@ -28,6 +28,30 @@ export default function(opt) {
     const app = new Koa();
     const router = new Router();
 
+    app.use(async (ctx, next) => {
+        try {
+            await next();
+        } catch (err) {
+            ctx.status = err.status || 500;
+            ctx.body = err.message;            
+            ctx.app.emit('error', err, ctx);
+        }
+    });
+    
+    if (opt.token) {
+        app.use((ctx, next) => {
+            const token = ctx.request.query.token;
+            if (!token || opt.token !== token) {
+                const err = new Error(`Missing or unknown token.`);
+                err.status = 511;
+                err.code = 'TOKEN_ERROR';
+                throw err;
+            } else {
+                return next();
+            }
+        });
+    }
+
     router.get('/api/status', async (ctx, next) => {
         const stats = manager.stats;
         ctx.body = {
