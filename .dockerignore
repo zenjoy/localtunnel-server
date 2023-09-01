@@ -1,2 +1,6 @@
 .git
+.github
+.tool-versions
 node_modules
+test
+Dockerfile

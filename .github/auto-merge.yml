@@ -1,0 +1,4 @@
+# Run on autopilot
+- match:
+    dependency_type: all
+    update_type: all

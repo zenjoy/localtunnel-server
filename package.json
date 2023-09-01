@@ -11,25 +11,35 @@
   "dependencies": {
     "book": "1.3.3",
     "debug": "3.1.0",
-    "esm": "3.0.34",
+    "esm": "3.2.25",
     "human-readable-ids": "1.0.3",
     "koa": "2.5.1",
     "koa-router": "7.4.0",
     "localenv": "0.2.2",
     "optimist": "0.6.1",
-    "portfinder": "1.0.20",
+    "portfinder": "1.0.32",
     "pump": "3.0.0",
     "tldjs": "2.3.1",
     "yn": "3.0.0"
   },
   "devDependencies": {
-    "mocha": "5.1.1",
-    "node-dev": "3.1.3",
-    "supertest": "3.1.0",
-    "ws": "5.2.3"
+    "@babel/cli": "7.22.10",
+    "@babel/core": "7.22.11",
+    "@babel/preset-env": "7.22.14",
+    "@babel/register": "7.22.5",
+    "mocha": "10.2.0",
+    "node-dev": "8.0.0",
+    "supertest": "6.3.3",
+    "ws": "8.13.0"
+  },
+  "resolutions": {
+    "minimist": "1.2.6"
+  },
+  "overrides": {
+    "minimist": "1.2.6"
   },
   "scripts": {
-    "test": "mocha --check-leaks --require esm './**/*.test.js'",
+    "test": "mocha --exit --require @babel/register './test/*.test.js'",
     "start": "./bin/server",
     "dev": "node-dev bin/server --port 3000"
   }

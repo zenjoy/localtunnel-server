@@ -1,4 +1,4 @@
-FROM node:10.1.0-alpine
+FROM node:18.17.1-alpine
 
 WORKDIR /app
 
@@ -7,7 +7,9 @@ COPY yarn.lock /app/
 
 RUN yarn install --production && yarn cache clean
 
+RUN adduser -D localtunnel
+USER localtunnel
+
 COPY . /app
 
-ENV NODE_ENV production
 ENTRYPOINT ["node", "-r", "esm", "./bin/server"]
