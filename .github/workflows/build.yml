@@ -65,6 +65,7 @@ jobs:
             docker.io/zenjoy/localtunnel
             ghcr.io/zenjoy/localtunnel
           tags: |
+            type=semver,pattern={{major}}.{{minor}}.{{patch}},value=v${{ steps.nodejs.outputs.version }}
             type=semver,pattern={{major}}.{{minor}},value=v${{ steps.nodejs.outputs.version }}
             type=semver,pattern={{major}},value=v${{ steps.nodejs.outputs.version }}
           labels: |
