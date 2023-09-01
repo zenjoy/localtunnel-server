@@ -46,7 +46,7 @@ jobs:
       - name: Parse Node Version
         id: nodejs
         run: |
-          NODE_VERSION=$(grep -Eo 'node:[0-9]+\.[0-9]+\.[0-9]+-alpine$' Dockerfile)
+          NODE_VERSION=$(grep -Eo 'node:[0-9]+\.[0-9]+\.[0-9]+-alpine$' Dockerfile | cut -d ':' -f2 | rev | cut -d . -f1- | rev | cut -d '-' -f1)
           echo "version=$NODE_VERSION" | tee -a $GITHUB_OUTPUT
 
       - name: Generate build tag from head
