@@ -114,7 +114,7 @@ jobs:
 
       - name: Push version tags
         run: |
-          git tag -f "v$VERSION"
-          git push -f -u origin "v$VERSION"
+          git tag -f "$VERSION"
+          git push -f -u origin "$VERSION"
         env:
           VERSION: v${{ steps.nodejs.outputs.version }}
