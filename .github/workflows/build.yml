@@ -16,14 +16,14 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Parse Node Version
         id: nodejs
         run: |
           NODE_VERSION=$(grep -Eo 'node:[0-9]+\.[0-9]+\.[0-9]+-alpine$' Dockerfile | cut -d ':' -f2 | rev | cut -d . -f1- | rev | cut -d '-' -f1)
           echo "version=$NODE_VERSION" | tee -a $GITHUB_OUTPUT
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '${{ steps.nodejs.outputs.version }}'
       - run: yarn
