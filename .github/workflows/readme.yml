@@ -16,14 +16,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Get docker image name
-        id: name
-        run: echo "name=$(echo ${GITHUB_REPOSITORY,,} | sed 's/docker-//')" | tee -a $GITHUB_OUTPUT
-
       - name: Update Docker Hub description
         uses: peter-evans/dockerhub-description@v3
         with:
-          repository: ${{ steps.name.outputs.name }}
+          repository: zenjoy/localtunnel
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           short-description: ${{ github.event.repository.description }}
