@@ -12,4 +12,5 @@ USER localtunnel
 
 COPY . /app
 
+EXPOSE 8080
 ENTRYPOINT ["node", "-r", "esm", "./bin/server"]
