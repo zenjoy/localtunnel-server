@@ -8,7 +8,7 @@ import Router from 'koa-router';
 
 import ClientManager from './ClientManager';
 
-const debug = Debug('localtunnel:server');
+const debug = Debug('lt:server');
 
 export default function (opt) {
   opt = opt || {};
