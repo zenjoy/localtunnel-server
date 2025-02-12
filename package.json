@@ -13,7 +13,7 @@
     "debug": "3.1.0",
     "esm": "3.2.25",
     "human-readable-ids": "1.0.3",
-    "koa": "2.5.1",
+    "koa": "2.15.4",
     "koa-router": "7.4.0",
     "localenv": "0.2.2",
     "optimist": "0.6.1",
